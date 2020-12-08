@@ -7,11 +7,11 @@ public class CursorController : MonoBehaviour
 {
     //VARIABILE USATE PER IL SISTEMA MANUALE DI CAMBIO DI INPUT TRA MOUSE/TOUCH E CONTROLLER
     //public bool usingMouseInput; 
+
     public float controllerCursorSpeed;
     public float mouseCursorSpeed;
-    private Vector3 mouseMovement;
+    private Vector3 mousePosAtControllerSwitch;
     public Vector2 cursorPos;
-    public Texture2D cursorTexture;
     public GameObject Cursore;
     private void Start()
     {
@@ -39,11 +39,10 @@ public class CursorController : MonoBehaviour
         */
         /// <summary>
 
-        if (Input.GetAxis("Horizontal") == 0 &&  Input.GetAxis("Vertical") == 0 && Input.mousePosition != mouseMovement)
+        if (Input.GetAxis("Horizontal") == 0 &&  Input.GetAxis("Vertical") == 0 && Input.mousePosition != mousePosAtControllerSwitch)
         {
             cursorPos = Input.mousePosition * mouseCursorSpeed;
-            mouseMovement = Input.mousePosition;
-            
+            mousePosAtControllerSwitch = Input.mousePosition;           
         }
         else
         {

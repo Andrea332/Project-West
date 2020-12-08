@@ -31,7 +31,7 @@ public class ClicksEvents : MonoBehaviour
 
         if (hit.collider != null)
         {
-            print("Ho Cliccato sull'oggetto giusto " + hit.collider.name);
+            print("Ho Cliccato sull'oggetto " + hit.collider.name);
         }
     }
 }
