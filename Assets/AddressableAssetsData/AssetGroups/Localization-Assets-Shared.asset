@@ -19,16 +19,12 @@ MonoBehaviour:
   m_SerializeEntries:
   - m_GUID: b7898fc1115dc274cb49e7e3cc75a289
     m_Address: UI Text Shared Data
-    m_ReadOnly: 0
+    m_ReadOnly: 1
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 0}
-    m_TargetAsset: {fileID: 0}
   - m_GUID: 65d705e08b09ecd40a3395ad3b9b5760
     m_Address: HUD Shared Data
-    m_ReadOnly: 0
+    m_ReadOnly: 1
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 0}
-    m_TargetAsset: {fileID: 0}
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: bbd89fb0e20c81f429839cd52669b1b5, type: 2}
   m_SchemaSet:
