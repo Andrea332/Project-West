@@ -9,16 +9,22 @@ public class CursorController : MonoBehaviour
     // Start is called before the first frame update
     public Text debugClickTesto;
     public Text debugPosizioneClick;
+    public SpriteRenderer level;
     public int numClick;
     public float controllerCursorSpeed;
     public float mouseCursorSpeed;
     private Vector3 mousePosAtControllerSwitch;
     public Vector2 cursorPos;
-    public GameObject Cursore;
-    public RectTransform rectTransform;
-    private void Start()
+    public RectTransform canvasRectTransform;
+    public RectTransform cursorRectTransform;
+    float shiftresolutionx;
+
+    void Start()
     {
         Cursor.visible = false;
+        float screenRatioX = 9 * Screen.width / Screen.height;
+        float resolutionx = 16 * Screen.width / screenRatioX;
+        shiftresolutionx = (Screen.width - resolutionx) / 2 ;
     }
     void Update()
     {
@@ -52,25 +58,26 @@ public class CursorController : MonoBehaviour
         {
             cursorPos += new Vector2(Input.GetAxis("Horizontal") * controllerCursorSpeed, Input.GetAxis("Vertical") * controllerCursorSpeed);
         }
-
-        cursorPos.x = Mathf.Clamp(cursorPos.x, 0, rectTransform.sizeDelta.x);
-        cursorPos.y = Mathf.Clamp(cursorPos.y, 0, rectTransform.sizeDelta.y);
+       
+        cursorPos.x = Mathf.Clamp(cursorPos.x, shiftresolutionx, Screen.width - shiftresolutionx);
+        cursorPos.y = Mathf.Clamp(cursorPos.y, 0, Screen.height);
 
         /*Vector3 posizione = Camera.main.ScreenToWorldPoint(cursorPos);
         posizione = new Vector3(posizione.x, posizione.y, 0);*/
-        Cursore.transform.position = cursorPos;
+        cursorRectTransform.transform.position = cursorPos;
 
         if (Input.GetButtonDown("Fire1"))
         {
             numClick++;
-            debugPosizioneClick.text = "Posizione " + gameObject.transform.position;
+            debugPosizioneClick.text = "Posizione " + cursorRectTransform.transform.position;
             Raycast();
         }
     }
 
     public void Raycast()
     {
-        RaycastHit2D hit = Physics2D.Raycast(Cursore.transform.position, Vector2.zero, 0);
+        RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, Vector2.zero, 0);
+        RaycastHit2D hit2 = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(gameObject.transform.position), Vector2.zero, 0);
 
         if (hit.transform != null)
         {
@@ -79,8 +86,20 @@ public class CursorController : MonoBehaviour
             //print(hit.collider.name);
             if (hit.collider.TryGetComponent(out Button button))
             {
-
+                button.onClick.Invoke();
             }
+            return;
+        }
+        if (hit2.transform != null)
+        {
+            print(hit2.transform.name);
+            debugClickTesto.text = "Cliccato " + hit2.transform.name;
+            //print(hit.collider.name);
+            if (hit2.collider.TryGetComponent(out Button button))
+            {
+                button.onClick.Invoke();
+            }
+            return;
         }
     }
 }

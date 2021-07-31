@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public abstract class HiddenObject : MonoBehaviour, IClickable
+public class HiddenObject : MonoBehaviour
 {
     public SpriteRenderer spriteRenderer;
     public bool inInventory;
 
-    public abstract void OnClick();
-
+    public void OnButtonClick()
+    {
+        PW_Inventory.AddObjectToInventory(this);
+    }
 }

@@ -22,4 +22,14 @@ public class PW_Ingamehud : MonoBehaviour
     {
         PW_Inventory.OpenInventory();
     }
+
+    public static void OpenMap()
+    {
+        Debug.Log("Map Opened");
+    }
+
+    public static void OpenDiary()
+    {
+        Debug.Log("Diary Opened");
+    }
 }

@@ -9,7 +9,7 @@ public class PW_Inventory : MonoBehaviour
 {
     public static PW_Inventory inventory;
     public GameObject inventoryContainer;
-    public TextMesh inventoryUpdateText;
+    public Text inventoryUpdateText;
     public List<HiddenObject> hiddenObjectsInInventory;
     public List<Transform> hiddenObjectsInventoryPositions;
 
@@ -28,11 +28,13 @@ public class PW_Inventory : MonoBehaviour
         if (inventory.hiddenObjectsInInventory.Count < inventory.hiddenObjectsInventoryPositions.Count)
         {
             if (!hiddenObject.inInventory)
-            { 
+            {
                 inventory.hiddenObjectsInInventory.Add(hiddenObject);
-                hiddenObject.transform.position = inventory.hiddenObjectsInventoryPositions[inventory.hiddenObjectsInInventory.Count - 1].position;
-                hiddenObject.spriteRenderer.sortingLayerName = "Inventory";
-                hiddenObject.spriteRenderer.sortingOrder = 1;
+                Image image = inventory.hiddenObjectsInventoryPositions[inventory.hiddenObjectsInInventory.Count - 1].GetComponent<Image>();
+                image.sprite = hiddenObject.spriteRenderer.sprite;
+                image.color = new Color32(255, 255, 255, 255);
+                hiddenObject.gameObject.SetActive(false);
+
                 hiddenObject.inInventory = true;
             }
         }
